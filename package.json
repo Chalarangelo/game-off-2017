@@ -1,0 +1,37 @@
+{
+  "name": "game-off-2017",
+  "version": "1.0.0",
+  "description": "My submission for the Github Game Off 2017",
+  "main": "index.js",
+  "dependencies": {
+    "phaser-ce": "^2.9.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "http-server": "^0.10.0",
+    "webpack": "^3.8.1"
+  },
+  "scripts": {
+    "build": "webpack",
+    "babel": "babel --presets env js/main.js -o scripts/main.bundle.js",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chalarangelo/game-off-2017.git"
+  },
+  "keywords": [
+    "game",
+    "game",
+    "off"
+  ],
+  "author": "chalarangelo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chalarangelo/game-off-2017/issues"
+  },
+  "homepage": "https://github.com/Chalarangelo/game-off-2017#readme"
+}
