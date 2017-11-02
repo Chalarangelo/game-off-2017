@@ -1,4 +1,5 @@
 import stateMain from './stateMain';
+import stateOver from './stateOver';
 
 export var game;
 
@@ -10,5 +11,6 @@ window.onload = () => {
     'ph_game'
   );
   game.state.add('stateMain', stateMain);
+  game.state.add('stateOver', stateOver);
   game.state.start('stateMain');
 }
