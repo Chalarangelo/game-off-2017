@@ -70,51 +70,110 @@
 "use strict";
 
 
-var _StateMain = __webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.game = undefined;
 
-var _StateMain2 = _interopRequireDefault(_StateMain);
+var _stateMain = __webpack_require__(2);
+
+var _stateMain2 = _interopRequireDefault(_stateMain);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var game;
+var game = exports.game = undefined;
 
 window.onload = function () {
-    var isMobile = navigator.userAgent.indexOf("Mobile");
-
-    if (isMobile == -1) {
-        game = new Phaser.Game(480, 640, Phaser.AUTO, "ph_game");
-    } else {
-        game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, "ph_game");
-        console.log("Mobile");
-    }
-
-    game.state.add("StateMain", _StateMain2.default);
-    game.state.start("StateMain");
+  exports.game = game = new Phaser.Game(window.innerWidth >= 480 ? 480 : window.innerWidth, window.innerHeight >= 640 ? 640 : window.innerHeight, Phaser.AUTO, 'ph_game');
+  game.state.add('stateMain', _stateMain2.default);
+  game.state.start('stateMain');
 };
 
 /***/ }),
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-var StateMain = {
 
-    preload: function preload() {},
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-    create: function create() {
-        console.log("Ready!");
-    },
+var _main = __webpack_require__(0);
 
-    update: function update() {}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-};
+var stateMain = function () {
+  function stateMain() {
+    _classCallCheck(this, stateMain);
+  }
 
-exports.default = StateMain;
+  _createClass(stateMain, [{
+    key: 'preload',
+    value: function preload() {
+      _main.game.load.image('player', 'assets/player.png');
+      _main.game.load.image('obstacle', 'assets/obstacle.png');
+      _main.game.load.image('ground', 'assets/ground.png');
+      _main.game.load.image('powerbar', 'assets/powerbar.png');
+    }
+  }, {
+    key: 'create',
+    value: function create() {
+      this.power = 0;
+      _main.game.stage.backgroundColor = '#cc0035';
+      this.ground = _main.game.add.sprite(0, _main.game.height * .9, 'ground');
+      this.hero = _main.game.add.sprite(_main.game.width * .2, this.ground.y - 25, 'player');
+      this.powerBar = _main.game.add.sprite(this.hero.x - 10, this.hero.y - 25, 'powerbar');
+      this.powerBar.width = 0;
+      _main.game.physics.startSystem(Phaser.Physics.ARCADE);
+      _main.game.physics.enable(this.hero, Phaser.Physics.ARCADE);
+      _main.game.physics.enable(this.ground, Phaser.Physics.ARCADE);
+      _main.game.input.onUp.add(this.mouseUp, this);
+      _main.game.input.onDown.add(this.mouseDown, this);
+      this.hero.body.gravity.y = 200;
+      this.hero.body.collideWorldBounds = true;
+      this.ground.body.immovable = true;
+    }
+  }, {
+    key: 'update',
+    value: function update() {
+      _main.game.physics.arcade.collide(this.hero, this.ground);
+    }
+  }, {
+    key: 'mouseDown',
+    value: function mouseDown() {
+      this.timer = _main.game.time.events.loop(Phaser.Timer.SECOND / 1000, this.increasePower, this);
+    }
+  }, {
+    key: 'mouseUp',
+    value: function mouseUp() {
+      this.doJump();
+      _main.game.time.events.remove(this.timer);
+      this.power = 0;
+      this.powerBar.width = 0;
+    }
+  }, {
+    key: 'increasePower',
+    value: function increasePower() {
+      this.power++;
+      this.powerBar.width = this.power;
+      if (this.power > 50) this.power = 50;
+    }
+  }, {
+    key: 'doJump',
+    value: function doJump() {
+      this.hero.body.velocity.y = -this.power * 12;
+    }
+  }]);
+
+  return stateMain;
+}();
+
+exports.default = stateMain;
 
 /***/ })
 /******/ ]);

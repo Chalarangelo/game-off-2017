@@ -1,21 +1,14 @@
-import StateMain from './StateMain';
+import stateMain from './stateMain';
 
-var game;
+export var game;
 
-window.onload = function()
-{
-	 var isMobile=navigator.userAgent.indexOf("Mobile");
-
-   if (isMobile==-1)
-    {
-        game=new Phaser.Game(480,640,Phaser.AUTO,"ph_game");
-    }
-    else
-    {
-      game=new Phaser.Game(window.innerWidth,window.innerHeight,Phaser.AUTO,"ph_game");
-      console.log("Mobile");
-    }
-
-    game.state.add("StateMain",StateMain);
-    game.state.start("StateMain");
+window.onload = () => {
+  game = new Phaser.Game(
+    window.innerWidth >= 480 ? 480 : window.innerWidth,
+    window.innerHeight >= 640 ? 640 : window.innerHeight,
+    Phaser.AUTO,
+    'ph_game'
+  );
+  game.state.add('stateMain', stateMain);
+  game.state.start('stateMain');
 }
