@@ -1,11 +1,3 @@
-// import * as PIXI from 'pixi';
-// import * as p2 from 'p2';
-// import * as Phaser from './phaser';
-// require('../node_modules/phaser-ce/build/custom/p2.js');
-// require('../node_modules/phaser/build/custom/pixi.js');
-// require('../node_modules/phaser/build/custom/phaser.js');
-// var PIXI = require('./pixi.js');
-// var phaser = require('phaser');
 import StateMain from './StateMain';
 
 var game;

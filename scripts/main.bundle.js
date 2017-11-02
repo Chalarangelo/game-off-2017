@@ -76,15 +76,7 @@ var _StateMain2 = _interopRequireDefault(_StateMain);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var game; // import * as PIXI from 'pixi';
-// import * as p2 from 'p2';
-// import * as Phaser from './phaser';
-// require('../node_modules/phaser-ce/build/custom/p2.js');
-// require('../node_modules/phaser/build/custom/pixi.js');
-// require('../node_modules/phaser/build/custom/phaser.js');
-// var PIXI = require('./pixi.js');
-// var phaser = require('phaser');
-
+var game;
 
 window.onload = function () {
     var isMobile = navigator.userAgent.indexOf("Mobile");
